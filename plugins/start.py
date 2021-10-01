@@ -16,9 +16,9 @@ from database.sql import add_user, query_msg
 
 
 
-WAIT_MSG = """"<b>Processing ...</b>"""
+WAIT_MSG = """"<b>Memproses ...</b>"""
 
-REPLY_ERROR = """<code>Use this command as a replay to any telegram message with out any spaces.</code>"""
+REPLY_ERROR = """<code>Gunakan Command Ini Untuk Reply Postingan.</code>"""
 
 
 #=====================================================================================##
@@ -58,11 +58,11 @@ async def start_command(client: Client, message: Message):
                 ids = [int(int(argument[1]) / abs(client.db_channel.id))]
             except:
                 return
-        temp_msg = await message.reply("Please wait...")
+        temp_msg = await message.reply("Tunggu Sebentar...")
         try:
             messages = await get_messages(client, ids)
         except:
-            await message.reply_text("Something went wrong..!")
+            await message.reply_text("Ada Yang Salah..!")
             return
         await temp_msg.delete()
 
@@ -91,8 +91,7 @@ async def start_command(client: Client, message: Message):
         reply_markup = InlineKeyboardMarkup(
             [
                 [
-                    InlineKeyboardButton("😊 About Me", callback_data = "about"),
-                    InlineKeyboardButton("🔒 Close", callback_data = "close")
+                    InlineKeyboardButton("🔒 Tutup", callback_data = "close")
                 ]
             ]
         )
@@ -190,10 +189,10 @@ async def send_text(client: Bot, message: Message):
         status = f"""<b><u>Broadcast Completed</u>
 
 Total Users: <code>{total}</code>
-Successful: <code>{successful}</code>
+Sukses: <code>{successful}</code>
 Blocked Users: <code>{blocked}</code>
-Deleted Accounts: <code>{deleted}</code>
-Unsuccessful: <code>{unsuccessful}</code></b>"""
+Akun Terhapus: <code>{deleted}</code>
+Gagal: <code>{unsuccessful}</code></b>"""
         
         return await pls_wait.edit(status)
 
